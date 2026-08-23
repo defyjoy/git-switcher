@@ -28,11 +28,13 @@ else
 fi
 
 ln -sfn "$DEST" "${BIN_DIR}/git-switcher"
+ln -sfn "$DEST" "${BIN_DIR}/gu"
 
 echo
 echo "Binaries:"
 echo "  ${BIN_DIR}/git-use"
 echo "  ${BIN_DIR}/git-switcher → git-use"
+echo "  ${BIN_DIR}/gu → git-use"
 echo
 
 # PATH check

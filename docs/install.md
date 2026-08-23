@@ -10,6 +10,7 @@ This installs:
 
 - `~/.local/bin/git-use`
 - `~/.local/bin/git-switcher` (symlink)
+- `~/.local/bin/gu` (symlink shortcut)
 
 ### PATH
 
@@ -98,7 +99,7 @@ Or from a clone: `git pull && ./install.sh`
 ## Uninstall
 
 ```bash
-rm -f ~/.local/bin/git-use ~/.local/bin/git-switcher
+rm -f ~/.local/bin/git-use ~/.local/bin/git-switcher ~/.local/bin/gu
 # optional: remove symlink used by Host github.com
 # rm -f ~/.ssh/github-active
 ```

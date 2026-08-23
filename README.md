@@ -65,7 +65,7 @@ git-use status
 git-use doctor
 ```
 
-`git-switcher` is an alias for the same binary.
+`git-switcher` and `gu` are shortcuts for the same binary.
 
 ## Docs
 
