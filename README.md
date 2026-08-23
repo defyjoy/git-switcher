@@ -2,6 +2,24 @@
 
 Switch the active GitHub SSH key using **named Host profiles** in `~/.ssh/config`. Remotes stay `git@github.com:...` — no Host aliases in remote URLs.
 
+## Install
+
+### One-liner
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/defyjoy/git-switcher/main/install.sh | bash
+```
+
+### From clone
+
+```bash
+git clone git@github.com:defyjoy/git-switcher.git
+cd git-switcher
+./install.sh
+```
+
+Ensure `~/.local/bin` is on your `PATH`, then configure SSH profiles. Full steps: **[docs/install.md](docs/install.md)**.
+
 ## How it works
 
 1. `Host github.com` points at a symlink (e.g. `~/.ssh/github-active`).
@@ -31,15 +49,11 @@ Host joydeeplili
   IdentityFile ~/.ssh/lilisolutions
 ```
 
-## Install
+Initialize once:
 
 ```bash
-git clone git@github.com:defyjoy/git-switcher.git
-cd git-switcher
-./install.sh
+ln -sfn ~/.ssh/github ~/.ssh/github-active
 ```
-
-Requires `~/.local/bin` on your `PATH`.
 
 ## Usage
 
@@ -55,4 +69,5 @@ github-use doctor
 
 ## Docs
 
-See [docs/usage.md](docs/usage.md).
+- [Installation](docs/install.md)
+- [Usage](docs/usage.md)

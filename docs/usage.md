@@ -1,5 +1,7 @@
 # Usage
 
+Install first: see [install.md](install.md).
+
 ## Profile rules
 
 A Host block is treated as a switchable profile when:
