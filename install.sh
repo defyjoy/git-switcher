@@ -15,9 +15,6 @@ fi
 
 mkdir -p "$BIN_DIR"
 
-# Remove previous binary name if present
-rm -f "${BIN_DIR}/github-use"
-
 if [[ -n "$ROOT" && -f "${ROOT}/bin/git-use" ]]; then
   install -m 755 "${ROOT}/bin/git-use" "$DEST"
   echo "Installed from local clone → $DEST"

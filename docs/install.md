@@ -98,7 +98,7 @@ Or from a clone: `git pull && ./install.sh`
 ## Uninstall
 
 ```bash
-rm -f ~/.local/bin/git-use ~/.local/bin/git-switcher ~/.local/bin/github-use
+rm -f ~/.local/bin/git-use ~/.local/bin/git-switcher
 # optional: remove symlink used by Host github.com
 # rm -f ~/.ssh/github-active
 ```
