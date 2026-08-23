@@ -8,7 +8,7 @@ curl -fsSL https://raw.githubusercontent.com/defyjoy/git-switcher/main/install.s
 
 This installs:
 
-- `~/.local/bin/github-use`
+- `~/.local/bin/git-use`
 - `~/.local/bin/git-switcher` (symlink)
 
 ### PATH
@@ -54,7 +54,7 @@ Host github.com
   IdentityFile ~/.ssh/github-active
 ```
 
-3. Add one Host profile per account (names are what you pass to `github-use`):
+3. Add one Host profile per account (names are what you pass to `git-use`):
 
 ```sshconfig
 Host defyjoy
@@ -79,9 +79,9 @@ ln -sfn ~/.ssh/github ~/.ssh/github-active
 5. Verify:
 
 ```bash
-github-use doctor
-github-use list
-github-use joydeeplili
+git-use doctor
+git-use list
+git-use xyz
 ssh -T git@github.com
 ```
 
@@ -98,7 +98,7 @@ Or from a clone: `git pull && ./install.sh`
 ## Uninstall
 
 ```bash
-rm -f ~/.local/bin/github-use ~/.local/bin/git-switcher
+rm -f ~/.local/bin/git-use ~/.local/bin/git-switcher ~/.local/bin/github-use
 # optional: remove symlink used by Host github.com
 # rm -f ~/.ssh/github-active
 ```

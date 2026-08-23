@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-# github-use — switch the active GitHub SSH key using named Host profiles in ~/.ssh/config
+# git-use — switch the active GitHub SSH key using named Host profiles in ~/.ssh/config
 set -euo pipefail
 
-VERSION="0.1.0"
+VERSION="0.2.0"
 SSH_CONFIG="${GIT_SWITCHER_SSH_CONFIG:-${HOME}/.ssh/config}"
 ACTIVE_HOST="${GIT_SWITCHER_ACTIVE_HOST:-github.com}"
 DEFAULT_ACTIVE_KEY="${GIT_SWITCHER_ACTIVE_KEY:-${HOME}/.ssh/github-active}"
 
 usage() {
   cat <<'EOF'
-github-use — switch GitHub SSH identity from named Host profiles in ssh config
+git-use — switch GitHub SSH identity from named Host profiles in ssh config
 
 Usage:
-  github-use <profile>     Switch active github.com key to profile's IdentityFile
-  github-use list          List GitHub Host profiles
-  github-use status        Show active key and authenticate
-  github-use doctor        Validate ssh config setup
-  github-use version       Print version
+  git-use <profile>     Switch active github.com key to profile's IdentityFile
+  git-use list          List GitHub Host profiles
+  git-use status        Show active key and authenticate
+  git-use doctor        Validate ssh config setup
+  git-use version       Print version
 
 Profiles are Host blocks in ~/.ssh/config where HostName is github.com
 and the Host name is not github.com itself, for example:
@@ -40,7 +40,7 @@ and the Host name is not github.com itself, for example:
     IdentityFile ~/.ssh/lilisolutions
 
 Then:
-  github-use joydeeplili
+  git-use xyz
   ssh -T git@github.com
 EOF
 }
@@ -241,7 +241,7 @@ cmd_doctor() {
       echo "ERROR: Host $ACTIVE_HOST has no IdentityFile"
       ok=1
     elif [[ ! -L "$id" ]]; then
-      echo "WARN: $id is not a symlink — github-use will create/replace it as a symlink to the profile key"
+      echo "WARN: $id is not a symlink — git-use will create/replace it as a symlink to the profile key"
     else
       echo "OK: active IdentityFile is a symlink → $(readlink "$id")"
     fi
@@ -275,7 +275,7 @@ cmd_switch() {
   local rec hn id active
 
   if [[ "$profile" == "$ACTIVE_HOST" ]]; then
-    echo "ERROR: '$profile' is the active host, not a profile. Use: github-use list" >&2
+    echo "ERROR: '$profile' is the active host, not a profile. Use: git-use list" >&2
     return 1
   fi
 
@@ -334,7 +334,7 @@ main() {
       usage
       ;;
     version|--version|-V)
-      echo "github-use $VERSION"
+      echo "git-use $VERSION"
       ;;
     list|ls)
       cmd_list

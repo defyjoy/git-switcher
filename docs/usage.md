@@ -14,11 +14,11 @@ A Host block is treated as a switchable profile when:
 
 | Command | Description |
 |---------|-------------|
-| `github-use <profile>` | Point active `IdentityFile` symlink at the profile key, then `ssh -T` |
-| `github-use list` | List profiles and key paths |
-| `github-use status` | Show symlink target and authenticate |
-| `github-use doctor` | Validate config |
-| `github-use version` | Print version |
+| `git-use <profile>` | Point active `IdentityFile` symlink at the profile key, then `ssh -T` |
+| `git-use list` | List profiles and key paths |
+| `git-use status` | Show symlink target and authenticate |
+| `git-use doctor` | Validate config |
+| `git-use version` | Print version |
 
 ## Environment
 
@@ -30,6 +30,6 @@ A Host block is treated as a switchable profile when:
 
 ## Safety
 
-If `Host github.com` still points at a real profile private key (not a dedicated symlink path), `github-use` refuses to overwrite it and tells you to set `IdentityFile ~/.ssh/github-active` first.
+If `Host github.com` still points at a real profile private key (not a dedicated symlink path), `git-use` refuses to overwrite it and tells you to set `IdentityFile ~/.ssh/github-active` first.
 
 If it points at some other regular file, that file is copied to `*.bak` once, then replaced by a symlink.

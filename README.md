@@ -1,4 +1,4 @@
-# github-use (git-switcher)
+# git-use (git-switcher)
 
 Switch the active GitHub SSH key using **named Host profiles** in `~/.ssh/config`. Remotes stay `git@github.com:...` — no Host aliases in remote URLs.
 
@@ -23,8 +23,8 @@ Ensure `~/.local/bin` is on your `PATH`, then configure SSH profiles. Full steps
 ## How it works
 
 1. `Host github.com` points at a symlink (e.g. `~/.ssh/github-active`).
-2. Profile Hosts (`defyjoy`, `joydeeplili`, …) each set `HostName github.com` and their own `IdentityFile`.
-3. `github-use <profile>` reads that profile’s key and repoints the symlink.
+2. Profile Hosts (`personal`, `xyz`, …) each set `HostName github.com` and their own `IdentityFile`.
+3. `git-use <profile>` reads that profile’s key and repoints the symlink.
 
 ## SSH config
 
@@ -35,8 +35,8 @@ Host github.com
   IdentitiesOnly yes
   IdentityFile ~/.ssh/github-active
 
-# Profiles (names you pass to github-use)
-Host defyjoy
+# Profiles (names you pass to git-use)
+Host personal
   HostName github.com
   User git
   IdentitiesOnly yes
@@ -58,11 +58,11 @@ ln -sfn ~/.ssh/github ~/.ssh/github-active
 ## Usage
 
 ```bash
-github-use list           # profiles from ssh config
-github-use joydeeplili     # switch + ssh -T
-github-use defyjoy
-github-use status
-github-use doctor
+git-use list           # profiles from ssh config
+git-use xyz            # switch + ssh -T
+git-use personal
+git-use status
+git-use doctor
 ```
 
 `git-switcher` is an alias for the same binary.
