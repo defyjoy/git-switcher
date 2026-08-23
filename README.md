@@ -65,7 +65,7 @@ git-use status
 git-use doctor
 ```
 
-`git-switcher` and `gu` are shortcuts for the same binary.
+`git-switcher` is a symlink to the same binary. `gu` is a shell alias for `git-use` (added by `install.sh`).
 
 ## Docs
 

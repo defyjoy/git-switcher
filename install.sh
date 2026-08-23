@@ -7,6 +7,11 @@ set -euo pipefail
 REPO_RAW="${GIT_SWITCHER_RAW:-https://raw.githubusercontent.com/defyjoy/git-switcher/main}"
 BIN_DIR="${HOME}/.local/bin"
 DEST="${BIN_DIR}/git-use"
+ALIAS_BEGIN="# >>> git-use >>>"
+ALIAS_END="# <<< git-use <<<"
+ALIAS_BLOCK="${ALIAS_BEGIN}
+alias gu='git-use'
+${ALIAS_END}"
 
 ROOT=""
 if [[ -n "${BASH_SOURCE[0]:-}" && -f "${BASH_SOURCE[0]}" ]]; then
@@ -28,13 +33,51 @@ else
 fi
 
 ln -sfn "$DEST" "${BIN_DIR}/git-switcher"
-ln -sfn "$DEST" "${BIN_DIR}/gu"
+# Prefer shell alias gu; remove any old binary/symlink named gu
+rm -f "${BIN_DIR}/gu"
+
+install_shell_alias() {
+  local rc="$1"
+  local tmp
+  if [[ ! -e "$rc" ]]; then
+    touch "$rc"
+  fi
+  if grep -qF "$ALIAS_BEGIN" "$rc" 2>/dev/null; then
+    tmp="$(mktemp)"
+    awk -v begin="$ALIAS_BEGIN" -v end="$ALIAS_END" '
+      $0 == begin { inblock=1; next }
+      $0 == end { inblock=0; next }
+      !inblock { print }
+    ' "$rc" >"$tmp"
+    mv "$tmp" "$rc"
+    printf '\n%s\n' "$ALIAS_BLOCK" >>"$rc"
+    echo "Updated alias gu in $rc"
+  else
+    printf '\n%s\n' "$ALIAS_BLOCK" >>"$rc"
+    echo "Added alias gu='git-use' to $rc"
+  fi
+}
 
 echo
 echo "Binaries:"
 echo "  ${BIN_DIR}/git-use"
 echo "  ${BIN_DIR}/git-switcher → git-use"
-echo "  ${BIN_DIR}/gu → git-use"
+echo
+
+# Shell alias gu='git-use' for interactive shells
+alias_installed=0
+for rc in "${HOME}/.zshrc" "${HOME}/.bashrc" "${HOME}/.bash_profile"; do
+  if [[ -f "$rc" ]]; then
+    install_shell_alias "$rc"
+    alias_installed=1
+  fi
+done
+if [[ "$alias_installed" -eq 0 ]]; then
+  install_shell_alias "${HOME}/.zshrc"
+fi
+
+echo
+echo "Alias: gu → git-use (reload shell or: source ~/.zshrc)"
 echo
 
 # PATH check
@@ -57,6 +100,6 @@ esac
 
 echo
 echo "Next: configure SSH profiles (see docs/install.md), then:"
-echo "  git-use doctor"
+echo "  git-use doctor   # or: gu doctor"
 echo "  git-use list"
 echo "  git-use <profile>"
