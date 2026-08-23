@@ -41,8 +41,8 @@ cd git-switcher
 
 1. Keep real keys as separate files (examples):
 
-   - `~/.ssh/github` → account A  
-   - `~/.ssh/lilisolutions` → account B  
+   - `~/.ssh/github` → personal account  
+   - `~/.ssh/xyz` → xyz account
 
 2. Point `github.com` at a **symlink path** (not a profile key file):
 
